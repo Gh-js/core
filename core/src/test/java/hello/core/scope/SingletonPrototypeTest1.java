@@ -53,6 +53,21 @@ public class SingletonPrototypeTest1 {
             return count;
         }
     }
+    @Scope("singleton")
+    static class ClientBean2 {
+        private final PrototypeBean prototypeBean; //생성 시점에 주입
+
+        @Autowired
+        public ClientBean2(PrototypeBean prototypeBean) {
+            this.prototypeBean = prototypeBean;
+        }
+
+        public int logic() {
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount();
+            return count;
+        }
+    }
 
     @Scope("prototype")
     static class PrototypeBean {
